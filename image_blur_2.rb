@@ -57,5 +57,3 @@ end
   image.blur
 
   image.output_image
-
-  # image.find_coordinates
