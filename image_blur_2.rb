@@ -10,22 +10,6 @@ class Image
     end
   end
 
-  # def new_map(array, num)
-  #   if array.include? 1
-  #     array.each_with_index do |number, x|
-  #        return [x, num] if number == 1 
-  #      end
-  #   end
-  # end
-
-  # def find_coordinates  
-  #   new_array = [] 
-  #   @array.each_with_index do |inner_array, y|
-  #     new_array.push(new_map(inner_array, y)) 
-  #   end
-  #   puts new_array.compact.inspect
-  # end
-
   def find_coordinates  
     new_array = [] 
     @array.each_with_index do |inner_array, y|
