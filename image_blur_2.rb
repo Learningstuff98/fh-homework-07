@@ -1,52 +1,52 @@
 class Image
-    
+
   def initialize(array)
     @array = array
   end
-  
+
   def output_image
     @array.each do |arrays|
       puts arrays.join
     end
   end
 
-  def find_coordinates  
-    new_array = [] 
-    @array.each_with_index do |inner_array, y|
-      inner_array.each_with_index do |number, x|
-        new_array.push([x, y]) if number == 1
+  def find_coordinates
+    new_array = []
+    @array.each_with_index do |inner_array, col|
+      inner_array.each_with_index do |number, row|
+        new_array.push([row, col]) if number == 1
       end
     end
     new_array
   end
 
-  def set_north(x, y)
-    @array[x - 1][y] = 1 if x - 1 >= 0 && @array[x - 1][y] == 0
+  def set_north(row, col)
+    @array[row - 1][col] = 1 if row - 1 >= 0 && (@array[row - 1][col]).zero?
   end
 
-  def set_south(x, y)
-    @array[x + 1][y] = 1 if x + 1 <= @array.length - 1 && @array[x + 1][y] == 0 
+  def set_south(row, col)
+    @array[row + 1][col] = 1 if row + 1 <= @array.length - 1 && (@array[row + 1][col]).zero?
   end
 
-  def set_east(x, y)
-    @array[x][y + 1] = 1 if y + 1 <= @array[x].length - 1 && @array[x][y + 1] == 0              
+  def set_east(row, col)
+    @array[row][col + 1] = 1 if col + 1 <= @array[row].length - 1 && (@array[row][col + 1]).zero?
   end
 
-  def set_west(x, y)
-    @array[x][y - 1] = 1 if y != 0 && @array[x][y - 1] == 0
+  def set_west(row, col)
+    @array[row][col - 1] = 1 if col != 0 && (@array[row][col - 1]).zero?
   end
 
-  def blur   
-    find_coordinates.each do |y, x|
-      set_north(x, y) 
-      set_south(x, y)
-      set_east(x, y)
-      set_west(x, y)   
+  def blur
+    find_coordinates.each do |col, row|
+      set_north(row, col)
+      set_south(row, col)
+      set_east(row, col)
+      set_west(row, col)
     end
   end
 
 end
-  
+
 image = Image.new([
   [0, 0, 1, 0],
   [0, 0, 0, 0],
