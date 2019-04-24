@@ -1,0 +1,77 @@
+class Image
+    
+  def initialize(array)
+    @array = array
+  end
+  
+  def output_image
+    @array.each do |arrays|
+      puts arrays.join
+    end
+  end
+
+  # def new_map(array, num)
+  #   if array.include? 1
+  #     array.each_with_index do |number, x|
+  #        return [x, num] if number == 1 
+  #      end
+  #   end
+  # end
+
+  # def find_coordinates  
+  #   new_array = [] 
+  #   @array.each_with_index do |inner_array, y|
+  #     new_array.push(new_map(inner_array, y)) 
+  #   end
+  #   puts new_array.compact.inspect
+  # end
+
+  def find_coordinates  
+    new_array = [] 
+    @array.each_with_index do |inner_array, y|
+      inner_array.each_with_index do |number, x|
+        new_array.push([x, y]) if number == 1
+      end
+    end
+    new_array
+  end
+
+  def set_north(x, y)
+    @array[x - 1][y] = 1 if x - 1 >= 0 && @array[x - 1][y] == 0
+  end
+
+  def set_south(x, y)
+    @array[x + 1][y] = 1 if x + 1 <= @array.length - 1 && @array[x + 1][y] == 0 
+  end
+
+  def set_east(x, y)
+    @array[x][y + 1] = 1 if y + 1 <= @array[x].length - 1 && @array[x][y + 1] == 0              
+  end
+
+  def set_west(x, y)
+    @array[x][y - 1] = 1 if y != 0 && @array[x][y - 1] == 0
+  end
+
+  def blur   
+    find_coordinates.each do |y, x|
+      set_north(x, y) 
+      set_south(x, y)
+      set_east(x, y)
+      set_west(x, y)   
+    end
+  end
+
+end
+  
+  image = Image.new([
+    [0, 0, 1, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 1, 0, 0]
+    ])
+
+  image.blur
+
+  image.output_image
+
+  # image.find_coordinates
