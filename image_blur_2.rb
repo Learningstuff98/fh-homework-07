@@ -31,12 +31,10 @@ class Image
     end
   end
 
-  def east_helper(row, col)
-    @array[row][col + 1] = 1 if col + 1 <= @array[row].length - 1
-  end
-
   def set_east(row, col)
-    east_helper(row, col) if (@array[row][col + 1]).zero?
+    if col + 1 <= @array[row].length - 1 && (@array[row][col + 1]).zero?
+      @array[row][col + 1] = 1
+    end
   end
 
   def set_west(row, col)
