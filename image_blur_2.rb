@@ -38,7 +38,7 @@ class Image
   end
 
   def set_west(row, col)
-    if col != 0 && (@array[row][col - 1]).zero?
+    if !col.zero? && (@array[row][col - 1]).zero?
       @array[row][col - 1] = 1
     end
   end
@@ -54,7 +54,7 @@ class Image
 end
 
 image = Image.new([
-                    [0, 0, 1, 0],
+                    [0, 1, 0, 0],
                     [0, 0, 0, 0],
                     [0, 0, 0, 0],
                     [0, 1, 0, 0]
