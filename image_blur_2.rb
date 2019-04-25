@@ -1,5 +1,4 @@
 class Image
-
   def initialize(array)
     @array = array
   end
@@ -21,19 +20,29 @@ class Image
   end
 
   def set_north(row, col)
-    @array[row - 1][col] = 1 if row - 1 >= 0 && (@array[row - 1][col]).zero?
+    if row - 1 >= 0 && (@array[row - 1][col]).zero?
+      @array[row - 1][col] = 1
+    end
   end
 
   def set_south(row, col)
-    @array[row + 1][col] = 1 if row + 1 <= @array.length - 1 && (@array[row + 1][col]).zero?
+    if row + 1 <= @array.length - 1 && (@array[row + 1][col]).zero?
+      @array[row + 1][col] = 1
+    end
+  end
+
+  def east_helper(row, col)
+    @array[row][col + 1] = 1 if col + 1 <= @array[row].length - 1
   end
 
   def set_east(row, col)
-    @array[row][col + 1] = 1 if col + 1 <= @array[row].length - 1 && (@array[row][col + 1]).zero?
+    east_helper(row, col) if (@array[row][col + 1]).zero?
   end
 
   def set_west(row, col)
-    @array[row][col - 1] = 1 if col != 0 && (@array[row][col - 1]).zero?
+    if col != 0 && (@array[row][col - 1]).zero?
+      @array[row][col - 1] = 1
+    end
   end
 
   def blur
@@ -44,15 +53,14 @@ class Image
       set_west(row, col)
     end
   end
-
 end
 
 image = Image.new([
-  [0, 0, 1, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 1, 0, 0]
-])
+                    [0, 0, 1, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [0, 1, 0, 0]
+                  ])
 
 image.blur
 
